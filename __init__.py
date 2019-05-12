@@ -36,21 +36,15 @@ class pdfFile:
         
         if atalizaPdf != None:
             self.atalizaPdf(atalizaPdf)
-        #print( atalizaPdf )
+
         caminhoSaida = self.arquivoTxtCaminho()
         diretorioAtual = os.getcwd()
-        os.system('echo " " > ' + caminhoSaida  )
-        os.system("cd " + diretorioAtual + " ; pdftotext "+ atalizaPdf + " " + caminhoSaida + " 2>> pdftotext.log" )
-        
-        time.sleep( 1 )
+        os.system( "pdftotext "+ atalizaPdf + " " + caminhoSaida + " 2>> pdftotext.log" )
 
-        try:
-            arq = open(caminhoSaida, "r")
-            text = arq.read()
-            arq.close()
-        except:
-            if cont < 5:
-                text = self.getText( atalizaPdf , cont + 1 )
+
+        arq = open(caminhoSaida, "r")
+        text = arq.read()
+        arq.close()
 
         os.system("rm " + self.arquivoTxtCaminho() )
 
